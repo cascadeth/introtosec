@@ -11,13 +11,14 @@ cipher1='-aes-128-cbc'
 key=123456789010293847560987654321
 iv=09876543211029384756
 
+d_iv=65748392011234567890
 
 
 # Encipher the input file argument with both ciphers
 
 openssl enc $cipher1 -e -in $1 -out encrypt1.bin -K $key -iv $iv
-openssl enc $cipher1 -e -in encrypt1.bin -out encrypt2.bin -K $key -iv $iv
-openssl enc $cipher1 -e -in encrypt2.bin -out encrypt3.bin -K $key -iv $iv
+openssl enc $cipher1 -e -in $1 -out encrypt2.bin -K $key -iv $iv
+openssl enc $cipher1 -e -in $1 -out encrypt3.bin -K $key -iv $d_iv
 
 
 openssl enc $cipher1 -d -in encrypt2.bin -out decrypt2.txt -K $key -iv $iv
