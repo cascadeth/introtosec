@@ -1,7 +1,8 @@
 import hmac, base64, struct, hashlib, time
 
 SECRET = 'SooperSecretCode'
-ITER = 1
+PREV = -1
+TOKEN = -1
 
 def get_hotp_token(secret, intervals_no):
     key = base64.b32decode(secret, True)
@@ -20,6 +21,8 @@ print "Secret:", SECRET
 
 while True:
 
-    print ITER, get_totp_token(SECRET)
-    time.sleep(30)
-
+    TOKEN = get_totp_token(SECRET)
+    if TOKEN != PREV:
+        PREV = TOKEN
+        print TOKEN
+        #time.sleep(30)  
